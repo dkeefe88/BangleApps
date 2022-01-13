@@ -152,8 +152,10 @@ function onGPS(fix) {
 // BTN1 to start/stop recording
 setWatch(function() {
   started = !started;
-  if (started) g.setColor(0,1,0); else g.setColor(1,0,0);
+  if (started) g.setColor(0,0,1); else g.setColor(1,0,0);
   g.fillRect(120, 200, 240, 240);
+          Bangle.buzz();
+        Bangle.beep();
 }, BTN1, {repeat:true});
 
 
