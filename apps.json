@@ -5589,5 +5589,5 @@
       {"name":"dkrun.app.js","url":"app.js"},
       {"name":"dkrun.img","url":"app-icon.js","evaluate":true}
     ]
-  } 
+  }
 ]
