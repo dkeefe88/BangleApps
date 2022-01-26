@@ -6,7 +6,9 @@ var started = false;
 var elapsed = 0;
 var distance = 0;
 var pace = 0;
-var km = 1; // 1km elapsed counter
+var lapdist = 1; // lap distance counter (km)
+var laptime = 0; // lap time counter (sec)
+var lappace = 0; // lap pace
 var oldfix = {lat:0,lon:0};
 
 
@@ -89,14 +91,18 @@ function updateDisplay() {
   case 2: // average pace page
     g.setColor(1,1,1);
     g.clearRect(4, 16, 240, 66);
-    g.setFont("Vector",46);
-    g.drawString("Av Pace",26,16,true);
+//    g.setFont("Vector",46);
+//    g.drawString("Pace",50,0,true);
     g.clearRect(2, 100, 240, 180);
-    g.setFont("Vector",88);
+    g.setFont("Vector",116);
     pm = pace.toFixed(0);
     ps = Math.round((pace-pm)*60);
     ps = ("0"+ps).substr(-2);
-    g.drawString(pm+":"+ps,4,100);
+    g.drawString(pm+":"+ps,4,0);
+    lpm = lappace.toFixed(0);
+    lps = Math.round((lappace-lpm)*60);
+    lps = ("0"+lps).substr(-2);
+    g.drawString(lpm+":"+lps,4,100);
     break;
 
   case 3: // time page
@@ -132,10 +138,11 @@ function onGPS(fix) {
       dist = calcDist(oldfix.lat,oldfix.lon,fix.lat,fix.lon);
       writeLog(fix,dist);
       distance += dist;
-      if (distance >= km) {
+      if (distance >= lapdist) {
         Bangle.buzz();
-        Bangle.beep();
-        km++;
+        lappace = (elapsed-laptime)/60;
+        lapdist++;
+        laptime = elapsed;
       }
       pace = elapsed/(60*distance);
       oldfix=fix;
@@ -152,7 +159,7 @@ function onGPS(fix) {
 // BTN1 to start/stop recording
 setWatch(function() {
   started = !started;
-  if (started) g.setColor(0,1,1); else g.setColor(1,0,0);
+  if (started) g.setColor(0,1,0); else g.setColor(1,0,0);
   g.fillRect(120, 200, 240, 240);
   //Bangle.buzz();
   Bangle.beep();
