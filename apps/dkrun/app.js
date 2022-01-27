@@ -63,7 +63,7 @@ function updateDisplay() {
 
   case 0: // stopwatch page
     g.setColor(1,1,1);
-    g.clearRect(64, 16, 240, 62);
+    g.clearRect(0, 0, 240, 200);
     g.setFont("Vector",46);
     g.drawString("Stopwatch",4,16,true);
     ed = Date(0,0,0,0,0,elapsed,0);
@@ -73,7 +73,6 @@ function updateDisplay() {
     em = ("0"+em).substr(-2);
     es = ed.getSeconds();
     es = ("0"+es).substr(-2);
-    g.clearRect(2, 100, 240, 180);
     g.setFont("Vector",58);
     g.drawString(eh+":"+em+":"+es,2,100);
     break;
@@ -88,26 +87,26 @@ function updateDisplay() {
     g.drawString(distance.toFixed(2),4,100);
     break;
 
-  case 2: // average pace page
+  case 2: // pace page
     g.setColor(1,1,1);
-    g.clearRect(4, 16, 240, 66);
+    g.clearRect(0, 0, 240, 200);
 //    g.setFont("Vector",46);
 //    g.drawString("Pace",50,0,true);
-    g.clearRect(2, 100, 240, 180);
-    g.setFont("Vector",116);
+//    g.clearRect(2, 100, 240, 180);
+    g.setFont("Vector",88);
     pm = pace.toFixed(0);
     ps = Math.round((pace-pm)*60);
     ps = ("0"+ps).substr(-2);
-    g.drawString(pm+":"+ps,4,0);
+    g.drawString(pm+":"+ps,4,16);
     lpm = lappace.toFixed(0);
     lps = Math.round((lappace-lpm)*60);
     lps = ("0"+lps).substr(-2);
-    g.drawString(lpm+":"+lps,4,100);
+    g.drawString(lpm+":"+lps,4,104);
     break;
 
   case 3: // time page
     g.setColor(1,1,1);
-    g.clearRect(26, 16, 240, 62);
+    g.clearRect(0, 0, 240, 200);
     g.setFont("Vector",46);
     g.drawString("Time",64,16,true);
     cd = Date();
@@ -117,7 +116,6 @@ function updateDisplay() {
     cm = ("0"+cm).substr(-2);
     cs = cd.getSeconds();
     cs = ("0"+cs).substr(-2);
-    g.clearRect(4, 100, 240, 180);
     g.setFont("Vector",58);
     g.drawString(ch+":"+cm+":"+cs,2,100);
     break;
@@ -162,7 +160,7 @@ setWatch(function() {
   if (started) g.setColor(0,1,0); else g.setColor(1,0,0);
   g.fillRect(120, 200, 240, 240);
   //Bangle.buzz();
-  Bangle.beep();
+  //Bangle.beep();
 }, BTN1, {repeat:true});
 
 
